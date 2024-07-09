@@ -33,7 +33,7 @@ There is an idea of relocating this back to the 0x60000-0x7FFFF, **but it is ext
 
 ### 2. Rip the entire first 512K out - and eliminate the menu code:
 
-If you have used the Ghidra and examined the flow in the regions 0x60000-0x7FFFF, there is a *possibility* that the menu is starting at **0x6E000**. If it is, just clear it out (with extreme prejudice!). Make it jump to your custom app instead! ***Save that binary file separately!***
+If you have used the [Ghidra](https://ghidra-sre.org/) and examined the flow in the regions 0x60000-0x7FFFF, there is a *possibility* that the menu is starting at **0x6E000**. If it is, just clear the **0x6E000-0x6EFFF** region out (with extreme prejudice!). Make it jump to your custom app instead! ***Save that binary file separately!***
 
 ### 3. Insert this code (and assemble it using a 6502 assembler such as [6502 virtual assembler](https://www.masswerk.at/6502/assembler.html)) into the place formerly the menu (0x6E000):
 

@@ -23,3 +23,8 @@ More information on how to dump its ROM, analysis and references are on the head
 ## Running a Custom ROM:
 
 ![hello world](images/400in1_ROM_adaptor_helloWorld.jpg)
+##### Running with actual flash ROM inside.
+
+![christmas village](images/teensy41_to_handheld_artwork.jpg)
+
+##### Running with Teensy 4.1 ROM emulator. Artwork created using [NES Assets Workshop](https://nesrocks.itch.io/naw)

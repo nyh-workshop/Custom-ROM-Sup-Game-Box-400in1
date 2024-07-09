@@ -40,7 +40,7 @@ title: "How to dump the ROM?"
 
     ![RP2040 romdumper](images/rp2040_romdump_schematic.png)
 
-7. The breakout board needed to be **filed at its four corners**. Do it gently, do not file off too much of the corners! Look at the red rectangles in the picture:
+7. The breakout board needed to be **filed at its four corners**. Do it gently, do not file off too much of the corners! Look at the red rectangles in the picture for reference:
 
     ![file off breakout corners](images/file_the_breakout_corners.jpg)
 
