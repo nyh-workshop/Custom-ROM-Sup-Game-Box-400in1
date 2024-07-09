@@ -19,3 +19,7 @@ Also, they do appear in some different colors - red, blue, black, white and yell
 I do not know when this thing *actually* exist, I have been seeing a lot of these since late 2019 onwards.
 
 More information on how to dump its ROM, analysis and references are on the header. :arrow_up:
+
+## Running a Custom ROM:
+
+![hello world](images/400in1_ROM_adaptor_helloWorld.jpg)

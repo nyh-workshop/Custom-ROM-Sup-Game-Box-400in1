@@ -5,6 +5,8 @@ title: "Custom ROM"
 
 ## Custom ROM
 
+# Disclaimer: ***Do this at your own risk!*** Data loss, corruption or serious damage to the unit may occur! ***Proceed with caution!***
+
 Before proceeding to create your custom ROM for the handheld - please read the articles:
 
 - [How to dump the ROM](/HowToDumpTheROM.md)
@@ -251,6 +253,43 @@ You should be seeing this:
 
 ![custom ROM hello world!](images/customROM_helloWorld.png)
 
-### 5. Putting the ROM into a flash and run it in the actual handheld:
+### 5. Building the ROM adapter:
 
-Under construction!
+For this, a TSOP-48 or TSOP-56 flash is a good candidate for putting custom ROMs, since those Famiclones do run from these. You can build this adapter (PCB coming soon!):
+
+![ROM adaptor](images/400in1_ROM_adaptor.jpg)
+
+![ROM adaptor connected to unit](images/400in1_ROM_adaptor_connectedToUnit.jpg)
+
+If you have the board and you are building it, you need:
+
+- 2.54mm male and female headers
+- 26-pin IDC cable
+- 26-pin IDC connector
+- Crimper and a wire stripper
+- RT-TSOP48 adapter
+
+Here's a small guide:
+
+1. Cut, strip and crimp the IDC cable. Basically, one of the IDC cable ***must be longer than the other by at least 3-4cm***! This is to have the longer cable to be able to reach the ROM board's header.
+
+2. Connect and solder the shorter IDC cable to the "Bottom Header" as shown in the illustration. Do take note of the RED cable.
+
+    Also, please take note of the flash breakout area - there will be circle at the end, or two more extra pads as a guide:
+
+![soldering guide](images/400in1_ROM_adaptor_solderingGuide.png)
+
+3. Then solder the longer IDC cable to the "Top Header".
+
+4. Solder the male and female headers to the ROM adapter board according to the pictures, and then connect the cables to the board!
+
+### 6: Flashing the ROM:
+
+Once you have written the "Hello World" app, you can use a programmer such as T56 to copy the stuff into the flash chip. Of course, you also need to use the RT-TSOP48 adapter into the T56 too.
+
+```
+Attention: If you have those handhelds which have bit-swaps at the startup you need the original code fragment for the actual unit to run! 
+```
+
+When all is done, you should be seeing this:
+![hello world](images/400in1_ROM_adaptor_helloWorld.jpg)

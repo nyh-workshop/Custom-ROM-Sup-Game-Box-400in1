@@ -17,7 +17,7 @@ Most of the Sup Game Box 400-in-1 contains a BGA breakout board with a BGA flash
 
 For proper removal of the breakout board ["ChipQuik" removal alloy](https://www.chipquik.com/store/index.php?cPath=2200&osCsid=7mct4sj51vad1di6k4k8qs4n14) is used. ***Suggestions are welcome on other ways to extract the board without using the expensive ChipQuik!***
 
-# If you are not interested in the earlier attempts, you can go to "Dumping the ROM" link instead.
+# If you are not interested in the earlier attempts, you can go to "How to Dump the ROM" link instead. :arrow_up:
 
 
 ___
