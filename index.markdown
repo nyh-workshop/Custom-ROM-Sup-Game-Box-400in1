@@ -22,9 +22,20 @@ More information on how to dump its ROM, analysis and references are on the head
 
 ## Running a Custom ROM:
 
+![Sup 400-in-1 complete with ROM adaptor](images/sup400in1-ROM_withROMadaptor.jpg)
+##### Running a small compilation of homebrews. Fitted with the original plastic casing. A part of the plastic has been broken and filed off near the unit's power switch to accomodate the IDC cables.
+
 ![hello world](images/400in1_ROM_adaptor_helloWorld.jpg)
 ##### Running with actual flash ROM inside.
 
 ![christmas village](images/teensy41_to_handheld_artwork.jpg)
 
 ##### Running with Teensy 4.1 ROM emulator. Artwork created using [NES Assets Workshop](https://nesrocks.itch.io/naw)
+
+## Acknowledgements:
+
+- The [NESDev](https://forums.nesdev.org/) members for providing many info about NES programming.
+
+- The [BGC Forums](http://bootleg.games/BGC_Forum/index.php) members for providing useful info on the OneBus systems.
+
+- Fun homebrew games by [MobyDeee (DONG, 2023)](https://mobydeee.itch.io/dong-nes), [Fiskbit (Proximity Shift, 2023)](https://fiskbit.itch.io/proximity-shift) and [Voxel (Fish, 2023)](https://voxel.itch.io/nes-fish)

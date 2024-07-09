@@ -255,7 +255,7 @@ You should be seeing this:
 
 ### 5. Building the ROM adapter:
 
-For this, a TSOP-48 or TSOP-56 flash is a good candidate for putting custom ROMs, since those Famiclones do run from these. You can build this adapter (PCB coming soon!):
+For this, a TSOP-48 or TSOP-56 flash is a good candidate for putting custom ROMs, since those Famiclones do run from these. You can get the [PCB from PCBWay](https://www.pcbway.com/project/shareproject/Flash_ROM_adaptor_for_Sup_400_in_1_a935a830.html) and build the adaptor:
 
 ![ROM adaptor](images/400in1_ROM_adaptor.jpg)
 
@@ -269,9 +269,15 @@ If you have the board and you are building it, you need:
 - Crimper and a wire stripper
 - RT-TSOP48 adapter
 
+Currently this ROM adaptor supports:
+
+```
+S29GL064N90TFI03 (TSOP-48)
+```
+
 Here's a small guide:
 
-1. Cut, strip and crimp the IDC cable. Basically, one of the IDC cable ***must be longer than the other by at least 3-4cm***! This is to have the longer cable to be able to reach the ROM board's header.
+1. Cut, strip and crimp the IDC cable. Basically, one of the IDC cable ***must be longer than the other by at least 3-4cm***! This is to have the longer cable to be able to reach the ROM board's header. ***Both of the IDC cables are at least 13-15cm too***.
 
 2. Connect and solder the shorter IDC cable to the "Bottom Header" as shown in the illustration. Do take note of the RED cable.
 
