@@ -9,18 +9,19 @@ body {
     overflow-wrap: break-word;
     line-height: 1.5;
     color: #444;
+    overflow-y: scroll
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 html::-webkit-scrollbar {
-    display: none;
+    display: auto;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 html {
-    -ms-overflow-style: none;
+    -ms-overflow-style: auto;
     /* IE and Edge */
-    scrollbar-width: none;
+    scrollbar-width: thin;
     /* Firefox */
 }
 
@@ -279,7 +280,7 @@ ul.discover-posts li small a {
 
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #01242e;
+        background-color: #000000;
         color: #ddd;
     }
 
@@ -295,7 +296,7 @@ ul.discover-posts li small a {
     }
 
     a {
-        color: #8cc2dd;
+        color: rgb(0, 255, 0);
     }
 
     code {

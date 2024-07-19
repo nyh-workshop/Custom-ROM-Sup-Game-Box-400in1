@@ -37,7 +37,7 @@ graph TD;
     G-->H[Init TFT.];
     H-->I[Copies 0x30 bytes from 0x7FF70 to RAM area 0x400 and jump to there.];
     I-->J[At RAM area, bankswitching occurs by setting OneBus registers 0x4107-0x410B];
-    J-->K[Scan controller];
+    J-->K["Scan controller (0x7aa40)"];
     K-->|A+B held| L["Go to Main Device Test (0x7AA60)"];
     K-->|no button presses| M["Go to Game Menu (0x6E000)"];
     M-->N["Enable Backlight by setting 0x0F to address 0x412C"]
@@ -89,6 +89,47 @@ writeCMD(0x36);
 writeCMD(0x28);
 ```
 
+The functions that write the command and data to the TFT uses **$4230 and $4231**. At **$4233** again if it is a write command, $94 is written. If it is a write data, $D4 is written.
+
+```
+// ORG 0x66ABE
+// Write CMD to TFT:
+void fun_0x66ABE(uint8_t a0)
+{
+	// Possibly save a0 at 0x23 (RAM area), then copy to addr 0x4231.
+	// Swap contents of RAM addr. 0x23, 0x24 and assign to 0x4230, 0x4231.
+	// Then, 0x94 is assigned to addr. 0x4233:
+	
+	// At RAM area?
+	*(0x23) = a0;
+	a0 = *(0x24);
+	*(0x4230) = a0;
+	a0 = *(0x23);
+	*(0x4231) = a0;
+	
+	*(0x4233) = 0x94;
+}
+
+// ORG 0x66AD0
+// Write data to TFT:
+void fun_0x66AD0(uint8_t a0)
+{
+	// Possibly save a0 at 0x25 (RAM area), then copy to addr 0x4231.
+	// Swap contents of RAM addr. 0x25, 0x26 and assign to 0x4230, 0x4231.
+	// Then, 0xd4 is assigned to addr. 0x4233:
+	
+	// At RAM area?
+	*(0x25) = a0;
+	a0 = *(0x26);
+	*(0x4230) = a0;
+	a0 = *(0x25);
+	*(0x4231) = a0;
+	
+	*(0x4233) = 0xd4;
+}
+
+```
+
 The TFT init values are not stored in an array.
 
 ### Type 2:
@@ -128,10 +169,13 @@ uint8_t LCD_settings[] = {
     0xFE, 0xF4, 0x0D, 0x19, 0x17, 0x1D, 0x1E, 0x0F, 0xFE, 0xF5, 0x06, 0x12,
     0x13, 0x1A, 0x1B, 0x0F, 0xFE, 0x29, 0xFE, 0x2C}
 ```
+
+Similar to the Type 1, it uses the same registers to write to TFT.
+
 (Ghidra is used to decompile this to C code!)
 
 ### Type 3:
-This one is from the **newer handheld in 2023**. The code is ***extremely convoluted even when it is decompiled into C***!
+This one is from the **newer handheld in 2023**. The code is ***extremely convoluted even when it is decompiled into C***! Unfortunately, it is still not known how it writes to the TFT - there are multiple registers that are involved!
 
 At the startup, the app has to jump to *as far as address 0x2A000* where all the TFT routines are.
 
