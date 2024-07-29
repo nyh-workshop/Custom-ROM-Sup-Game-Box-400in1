@@ -63,7 +63,7 @@ The ones I found are:
 
 ![bit swap at opcode](images/opcodeBitswap.png)
 
-After some inspection, bits 4-5 are swapped. The emulator finally runs the dump if you swap these opcode's bits at that code fragment:
+After some inspection, **bits 4-5 are swapped**. The emulator finally runs the dump if you swap these opcode's bits at that code fragment:
 
 ![swapping the bits again](images/opcodeBitSwap_correct.png)
 
@@ -75,7 +75,7 @@ The game runs in the emulator - but you must ***leave the bits in the original s
 
 ## TFT initialization routines:
 
-This is what makes the handheld console... a handheld console. If these routines are not present, the **screen has no output** and the only other display is on the AV-out jack. That's no longer handheld if you need to carry along a TV to play it!
+This is what makes the handheld console... a handheld console. If these routines are not present, the ***screen has no output*** and the only other display is on the AV-out jack. That's no longer handheld if you need to carry along a TV to play it!
 
 I have examined three of these and each of them seemed to be an improvement over the other one. Let's call them type 1, 2 and 3:
 
@@ -172,7 +172,7 @@ uint8_t LCD_settings[] = {
 
 Similar to the Type 1, it uses the same registers to write to TFT.
 
-(Ghidra is used to decompile this to C code!)
+([Ghidra](https://ghidra-sre.org/) is used to decompile this to C code!)
 
 ### Type 3:
 This one is from the **newer handheld in 2023**. The code is ***extremely convoluted even when it is decompiled into C***! Unfortunately, it is still not known how it writes to the TFT - there are multiple registers that are involved!
@@ -185,3 +185,36 @@ Basically, instead of **putting one kind of TFT**, the developer had put many ot
 
 ---
 
+## Backlight:
+
+If you have already read about the "*TFT Initialization Routines*" earlier, these TFT are equipped with a backlight. The strange part is, these backlight registers are different in each of these builds. For the [GC9306 TFTs](documents/GC9306_DS_V1.01.pdf) inside the handhelds, nothing happens when I tried to write anything to its backlight (TFT) registers. The backlight might be connected to the handheld's system.
+
+I also noticed that as for now I've seen that ***only after the TFT initialization*** and ***when it is entering the menu***, the backlight switches on.
+
+### Type 1 and 2:
+
+The backlight is at $412C - putting a 0 there switches it off, and an 0xF switches it on:
+
+```
+; switches off backlight!
+lda #$00
+sta $412C
+
+; switches on backlight!
+lda #$0F
+sta $412C
+```
+
+### Type 3:
+
+Unfortunately, I did not get how it switches off the backlight. However, for switching it on, at the same menu start, it accesses and writes to this registers, which I suspect one of them are something to do with the backlight:
+
+```
+; Switches on backlight!
+lda #$1f
+sta $413f
+lda #$0b
+sta $4138
+lda #$0f
+sta $4139
+```
