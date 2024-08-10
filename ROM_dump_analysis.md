@@ -59,15 +59,32 @@ The ones I found are:
 
  - <u>Data bits swapped inside the dump</u>, for example bits 0-1 and bits 8-9. One tip is, view the dump using the [YY-CHR](https://www.romhacking.net/utilities/119/) app and examine if some of the tiles are distorted or not. If it is distorted (go browse the ROM around in the YY-CHR app and try looking at the alphanumeric characters for a start), you may need to examine the values in the binary files closely and see what bits have swapped.
 
- - <u>Bits at the </u>[opcodes are swapped](http://bootleg.games/BGC_Forum/index.php?topic=2412.0) <u>during startup</u>. This is seen in newer handheld that was bought in 2023. Here is an example when it is viewed in the EmuVT's trace debugger:
+    This is an example of the swapped bits 9-10 and bits 0-1:
+![example of data bits swapped](images/bitSwap9A_12_example.png)
 
-![bit swap at opcode](images/opcodeBitswap.png)
+    This is an original without bit swaps:
+![example without swapped bits](images/original_without_bitSwap_example.png)
 
-After some inspection, **bits 4-5 are swapped**. The emulator finally runs the dump if you swap these opcode's bits at that code fragment:
+ - <u>Bits at the </u>[opcodes are swapped](http://bootleg.games/BGC_Forum/index.php?topic=2412.0) <u>during startup</u>. This is seen in newer handheld that was bought in 2023. 
+ 
+    Here is an example when it is viewed in the EmuVT's trace debugger:
 
-![swapping the bits again](images/opcodeBitSwap_correct.png)
+    ![bit swap at opcode](images/opcodeBitswap.png)
 
-The game runs in the emulator - but you must ***leave the bits in the original state*** if you need to run it in the handheld!
+    After some inspection, **bits 4-5 are swapped**. The emulator finally runs the dump if you swap these opcode's bits at that code fragment:
+
+    ![swapping the bits again](images/opcodeBitSwap_correct.png)
+
+- ***Both swapping of data bits, opcode bits and unknown calls to functions at unknown locations***. This variant comes from the recent purchase of the same handheld in 2024, but with the S29GL128P10TFI01 flash inside. This is the most difficult thing to examine because it needs more work to undo these swapping for the entire file, and then to undo the swapping of opcode bits at the start of the code!
+
+  To make it worse... there exists calls to some unknown instructions and calling a function at 0x394F (which leads to nowhere, of course), crashing the whole menu and the test app if it is run on the emulator:
+
+  ![unknown locations](images/unknownLocationsCall.png)
+
+  To fix that for running in emulator, replace these unknown function calls to NOP.
+
+
+The game runs in the emulator - but you must ***leave the bits in the original state*** if you need to run it in the handheld! Also, you need to possibly preserve the unknown calls and unknown instructions on the actual handheld too.
 
 
 ---
