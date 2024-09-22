@@ -235,3 +235,37 @@ sta $4138
 lda #$0f
 sta $4139
 ```
+
+---
+
+## Running on Mapper 4 (MMC3) games with only CHR-RAM
+
+As mentioned earlier I was not planning to analyze the menu app. However, during some more experiments, when running Mapper 4 (MMC3) games on these systems, the menu app has to go through the process of assigning the suitable values for the OneBus registers so that it can jump into the game and run it.
+
+The sequence of loading the registers are important - and I did copied the sequence from the menu code. Without the proper sequence and the proper values, the game runs fine but with wrong tiles and sprites.
+
+The correct sequence:
+
+```
+jumpToProgramInRAM:
+    lda _zR410A
+    sta $410A
+    lda _zR410B
+    sta $410B
+    lda _zR4100
+    sta $4100
+    lda _zR4105
+    sta $4105
+    lda _zR4106
+    sta $4106
+    lda _zR4107
+    sta $4107
+    lda _zR4108
+    sta $4108
+    lda _zR4109
+    sta $4109
+```
+
+Having the correct sequence is one thing - since the CHR-ROM is not involved, the $201x registers are not being used. But again, the lower nibble inside **register $4100 has to be between 0x04 and 0x0F** for these games to display the correct tiles and sprites! I'm not entirely sure the reason - I have examined the register values of these 400-in-1 menu and they are using that number.
+
+One of the 400-in-1s (2023) has a register at **$4118** - if games such as MMC3 and with only CHR-RAM, it is assigned **$80**. Else it is **$00**.
