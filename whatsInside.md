@@ -23,6 +23,8 @@ I have torn down these things and I found:
 
 - **BGA Flash Carrier**. The NOR flash are usually [Samsung K5L2731CAM-D770](documents/K5L2731CAM-D770.pdf), "Unknown Model" V00670002ADGB and [ST M36L0T705](documents/M36L0R7050T0.PDF). They are 16 megabytes of size. These sit on top of a breakout board that is then soldered onto the unit's PCB. Extracting this thing out is a painful and very error-prone process. I recommend a ChipQuik to do so for ROM dumping. ***Suggestions are welcome to extract this with a lower cost!*** Please refer to the "How to Dump its ROM" for more information.
 
+![TSOP56](images/tsop56.png)
+- **TSOP56 NOR Flash**. These NOR flash are usually S29GL128 or S29GL256. These ones are easier to remove by hot air, but you need a T56 Programmer to dump and reflash it. Also, the pads on these board are *very flimsy* and *very prone to lifting* if you put the hot air on it too long!
 
 ![Black Blob](images/black_blob.png)
 

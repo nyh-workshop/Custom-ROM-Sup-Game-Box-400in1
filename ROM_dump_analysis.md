@@ -8,7 +8,7 @@ mermaid: true
 
 # Notice: Any requests on getting the ROM images from me will *not* be entertained!
 
-Three of the ROM dumps from these handhelds that are bought between 2020 and 2023 are analyzed. Each of them seem to have some variations on its reset vectors and the startup code. However, the list of the games are mostly unchanged.
+Few of the ROM dumps from these handhelds that are bought between 2020 and 2026 are analyzed. Each of them seem to have some variations on its reset vectors and the startup code. However, the list of the games are mostly unchanged.
 
 ## Introduction:
 
@@ -17,6 +17,10 @@ Three of the ROM dumps from these handhelds that are bought between 2020 and 202
 On startup you will be presented with the language selection menu - Chinese or English. The background seemed to be from another game called "*Street Fighter 2010*".
 
 In the Chinese menu, there is a different music being played, while in the English menu, there is no music at all.
+
+![screenshots of G5 in emulator](images/G5_500in1.png)
+
+For the G5, it has 500 games instead of 400, but still with repeated games.
 
 If you hold the **A + B** and then press the **Reset button**, you will go into the "Main Device Test" where you can test the response of the buttons and the application is also testing different sound channels.
 
@@ -65,7 +69,8 @@ The ones I found are:
     This is an original without bit swaps:
 ![example without swapped bits](images/original_without_bitSwap_example.png)
 
- - <u>Bits at the </u>[opcodes are swapped](http://bootleg.games/BGC_Forum/index.php?topic=2412.0) <u>during startup</u>. This is seen in newer handheld that was bought in 2023. 
+ - <u>Bits at the </u>[opcodes are swapped](http://bootleg.games/BGC_Forum/index.php?topic=2412.0) <u>during startup</u>. This is seen in newer handheld that was bought in 2023.
+ Plus this is seen in the G5 handhelds too where bits 1,2 and 6,7 are swapped in the opcodes during startup. 
  
     Here is an example when it is viewed in the EmuVT's trace debugger:
 
@@ -192,11 +197,13 @@ Similar to the Type 1, it uses the same registers to write to TFT.
 ([Ghidra](https://ghidra-sre.org/) is used to decompile this to C code!)
 
 ### Type 3:
-This one is from the **newer handheld in 2023**. The code is ***extremely convoluted even when it is decompiled into C***! Unfortunately, it is still not known how it writes to the TFT - there are multiple registers that are involved!
+This one is from the **newer handheld in 2023** and even in the **G5** ones! The code is ***extremely convoluted even when it is decompiled into C using Ghidra***!
 
-At the startup, the app has to jump to *as far as address 0x2A000* where all the TFT routines are.
+Decompiling to C, it is *suspected* that it gets the values from the TFT module that is connected to the handheld. With those values, these are tested in each branches and determine what TFT model it is and how it can write the registers to it etc. The 0x0116 in the RAM keeps the TFT model that are obtained from reading the TFT.
 
-Basically, instead of **putting one kind of TFT**, the developer had put many other TFT models inside. I suspect that there is one variable for the TFT model that is saved into the flash and have that function select it and init the TFT accordingly. How convenient!
+At the startup, the app has to jump to *as far as address 0x2A000* (again this address varies from handhelds to handhelds!!) where all the TFT routines are.
+
+Basically, instead of **putting one kind of TFT**, the developers had put many other TFT models inside. How convenient!
 
 ![TFT models](images/400in1_2023_tft_models.png)
 
@@ -269,3 +276,7 @@ jumpToProgramInRAM:
 Having the correct sequence is one thing - since the CHR-ROM is not involved, the $201x registers are not being used. But again, the lower nibble inside **register $4100 has to be between 0x04 and 0x0F** for these games to display the correct tiles and sprites! I'm not entirely sure the reason - I have examined the register values of these 400-in-1 menu and they are using that number.
 
 One of the 400-in-1s (2023) has a register at **$4118** - if games such as MMC3 and with only CHR-RAM, it is assigned **$80**. Else it is **$00**.
+
+## Running on Mapper 4 (MMC3) games with only CHR-RAM (G5)
+
+The G5s I got in 2026 do use the register at **$4118** for MMC3 with CHR-RAM. If it is, it is assigned **$80**, else **$00**.

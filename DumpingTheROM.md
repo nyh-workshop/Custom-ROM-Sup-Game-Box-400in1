@@ -69,6 +69,12 @@ To improve the dumping speed, I had [reworked this dumper](https://github.com/ny
 
 For analysis, please read the [ROM dump analysis page](/ROM_dump_analysis.md).
 
+## Other attempts (2026):
+
+**K5L dumper**: I had did a custom PCB from the third attempt since working on a breadboard with loose wires doesn't help with getting a good dump. I'm putting this inside my Git in the future too since it is still in the early stages of development.
+
+![RP2040 romdumper PCB](images/K5L_dumper_new.png)
+
 ___
 
 

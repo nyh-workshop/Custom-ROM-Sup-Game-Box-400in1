@@ -3,7 +3,7 @@ layout: default
 title: "How to dump the ROM?"
 ---
 
-## How to dump the ROM?
+## How to dump the ROM (K5L Flash Breakout)?
 
 ---
 
@@ -36,9 +36,11 @@ title: "How to dump the ROM?"
 
 5. When the breakout board got detached, clean the vacated area with isopropyl alcohol and also get rid of the excess solder on the pads.
 
-6. With your breadboards, wires, Raspberry Pico RP2040 and the I/O expanders, [build the circuit as shown in the other repository](https://github.com/nyh-workshop/arduino-teensy41-noac/tree/main/arduino-rp2040-romdumper).
+6. With your breadboards, wires, Raspberry Pico RP2040 and the I/O expanders, [build the circuit as shown in the other repository](https://github.com/nyh-workshop/arduino-teensy41-noac/tree/main/arduino-rp2040-romdumper). Next: This is in a PCB too! I'm putting the files for PCB fabrication into the Git in the future!
 
     ![RP2040 romdumper](images/rp2040_romdump_schematic.png)
+
+    ![RP2040 romdumper PCB](images/K5L_dumper_new.png)
 
 7. The breakout board needed to be **filed at its four corners**. Do it gently, do not file off too much of the corners! Look at the red rectangles in the picture for reference:
 
